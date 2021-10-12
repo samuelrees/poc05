@@ -2,7 +2,7 @@
   "name": "poc05",
   "version": "0.1.0",
   "bin": {
-    "awscdk-codepipeline": "bin/awscdk-codepipeline.js"
+    "poc05-codepipeline": "bin/poc05-codepipeline.js"
   },
   "scripts": {
     "build": "tsc",
