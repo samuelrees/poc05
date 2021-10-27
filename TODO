@@ -1,0 +1,14 @@
+1.  Make sure Destroy removes all resources in AWS
+          ECR
+          S3
+          Roles
+          Policies
+2.  Deployment environments:
+       UAT
+       Staging
+       Prod
+3.  Environment variables (Remove hard-coded values)
+4.  All typescript classes should be under the lib directory
+5.  Make AWS resouce names human readable
+6.  Look into secondary account in AWS for Development
+
