@@ -1,4 +1,4 @@
-import {Construct, StackProps} from '@aws-cdk/core';
+import * as cdk from '@aws-cdk/core';
 import {Pipeline} from "@aws-cdk/aws-codepipeline";
 import {SourceStage} from "./stages/source-stage";
 import {BuildStage} from "./stages/build-stage";
@@ -6,9 +6,9 @@ import {DeployStage} from "./stages/deploy-stage";
 import {ApprovalStage} from "./stages/approval-stage";
 import {PipelineConfig} from "../config/pipleline-config";
 
-export class Poc05CodepipelineStack extends Stack {
+export class Poc05CodepipelineStack extends cdk.Stack {
 
-    constructor(scope: Construct, id: string, props?: StackProps) {
+    constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
         const appName = this.node.tryGetContext("appName");
