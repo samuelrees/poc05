@@ -1,4 +1,4 @@
-import {Stack} from "@aws-cdk/core";
+import {Stack, RemovalPolicy} from "@aws-cdk/core";
 import {CodeBuildAction} from "@aws-cdk/aws-codepipeline-actions";
 import {Artifact} from "@aws-cdk/aws-codepipeline";
 import {
@@ -23,7 +23,7 @@ export class BuildStage {
         this.stack = stack;
         this.appName = this.stack.node.tryGetContext('appName');
         this.ecrRepository = Repository.fromRepositoryName(this.stack, `EcrRepo-${PipelineConfig.serviceName}`, PipelineConfig.buildStage.ecrRepositoryName);
-        this.buildOutput = new Artifact();
+        this.buildOutput = new Artifact(), RemovalPolicy.DESTROY;
     }
 
     public getCodeBuildAction = (sourceOutput: Artifact): CodeBuildAction => {

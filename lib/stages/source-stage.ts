@@ -1,6 +1,6 @@
 import {CodeCommitSourceAction} from "@aws-cdk/aws-codepipeline-actions";
 import {IRepository, Repository} from "@aws-cdk/aws-codecommit";
-import {Stack} from "@aws-cdk/core";
+import {Stack, RemovalPolicy} from "@aws-cdk/core";
 import {PipelineConfig} from "../../config/pipleline-config";
 import {Artifact} from "@aws-cdk/aws-codepipeline";
 
@@ -11,7 +11,7 @@ export class SourceStage {
 
     constructor(stack: Stack) {
         this.stack = stack;
-        this.sourceOutput = new Artifact();
+        this.sourceOutput = new Artifact(),RemovalPolicy.DESTROY;
         this.repository = Repository.fromRepositoryName(stack,
             `${this.stack.node.tryGetContext("appName")}-${PipelineConfig.sourceStage.repositoryName}`,
             PipelineConfig.sourceStage.repositoryName);

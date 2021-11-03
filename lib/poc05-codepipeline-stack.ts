@@ -1,10 +1,12 @@
-import { Construct, Stack, StackProps } from '@aws-cdk/core';
+import { Construct, Stack, StackProps, RemovalPolicy } from '@aws-cdk/core';
+import { Bucket } from '@aws-cdk/aws-s3';
 import {Pipeline} from "@aws-cdk/aws-codepipeline";
 import {SourceStage} from "./stages/source-stage";
 import {BuildStage} from "./stages/build-stage";
 import {DeployStage} from "./stages/deploy-stage";
 import {ApprovalStage} from "./stages/approval-stage";
 import {PipelineConfig} from "../config/pipleline-config";
+
 
 export class Poc05CodepipelineStack extends Stack {
 
@@ -13,9 +15,15 @@ export class Poc05CodepipelineStack extends Stack {
 
         const appName = this.node.tryGetContext("appName");
 
-        const codepipeline = new Pipeline(this, appName, {
-            crossAccountKeys: false
-        })
+        // const codepipeline = new Pipeline(this, appName, {
+        //     crossAccountKeys: false
+        // })
+
+        const codepipeline =     new Pipeline(this, appName, {
+            artifactBucket: new Bucket(this, 'ArtifactBucket', {
+              removalPolicy: RemovalPolicy.DESTROY, autoDeleteObjects: true}),
+              crossAccountKeys: false
+            })
 
         //Source Stage
         const sourceStage = new SourceStage(this);
